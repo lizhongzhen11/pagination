@@ -1,7 +1,7 @@
 ## 原生js + 面向委托设计思想编写的low逼版分页插件
 
 ### 演示：
-![image](https://github.com/lizhongzhen11/vue-magnifier/blob/master/src/assets/GIF.gif)
+![image](https://github.com/lizhongzhen11/pagination/blob/master/GIF.gif)
 
 ### 说明
 
