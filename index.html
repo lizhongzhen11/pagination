@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>分页插件</title>
+    <link rel="stylesheet" href="./pagination.css">
+    <style>
+        .container {
+            height: 100px;
+            width: 800px;
+            /* border: 1px solid rosybrown; */
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container"></div>
+    <script src="./pagination.js"></script>
+    <script>
+        var container = document.getElementById('container')
+        pagination.init(container, {count: 48})
+    </script>
+</body>
+</html>

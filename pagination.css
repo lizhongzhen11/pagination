@@ -1,0 +1,177 @@
+/* 整个分页框样式 */
+/* 阻止点击li出现蓝色 */
+body {
+    -moz-user-select: none; /*火狐*/
+    -webkit-user-select: none; /*webkit浏览器*/
+    -ms-user-select: none; /*IE10*/
+    -khtml-user-select: none; /*早期浏览器*/
+    user-select: none;
+}
+
+.pagination-ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    color: rgb(80, 90, 110);
+}
+
+.pagination-ul > li {
+    display: inline-block;
+    height: 30px;
+    min-width: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.pagination-ul li+li {
+    border: 1px solid rgb(220, 222, 226);
+    color: rgb(80, 90, 110);
+    border-radius: 4px;
+    transition: border .2s ease-in-out, color .2s ease-in-out;
+}
+
+.pagination-ul li+li:hover {
+    cursor: pointer;
+    color: rgb(92, 173, 255);
+    border-color: rgb(92, 173, 255);
+    box-shadow: 0 1px 4px #B2D5FF;
+}
+
+/* 分页按妞选中时的样式 */
+.pagination-ul-active {
+    color: rgb(92, 173, 255)!important;
+    border-color: rgb(92, 173, 255)!important;
+    box-shadow: 0 1px 4px #B2D5FF;
+}
+
+/* 共有多少条结果的数字样式 */
+.pagination-count {
+    font-size: 18px;
+    color: rgb(92, 173, 255)!important;
+    vertical-align: top;
+}
+
+/* 上一页和下一页框 */
+.pagination-prev {
+    width: 50px;
+}
+
+/* 选择每页多少条的select框 */
+.pagination-pageSize {
+    width: 100px;
+    position: relative;
+}
+
+/*
+* @description 选择框里的箭头图标
+*/
+@font-face {
+    font-family: "iconfont";
+    src: url('iconfont.eot?t=1534245501846'); /* IE9*/
+    src: url('iconfont.eot?t=1534245501846#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAP8AAsAAAAABkgAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADMAAABCsP6z7U9TLzIAAAE8AAAARAAAAFY9C0iHY21hcAAAAYAAAABLAAABcOe9t2lnbHlmAAABzAAAAEgAAABIYom9nmhlYWQAAAIUAAAALAAAADYST/pRaGhlYQAAAkAAAAAcAAAAJAfeA4NobXR4AAACXAAAAAgAAAAICAAAAGxvY2EAAAJkAAAABgAAAAYAJAAAbWF4cAAAAmwAAAAeAAAAIAENAB5uYW1lAAACjAAAAUUAAAJtPlT+fXBvc3QAAAPUAAAAKAAAADmGlHpXeJxjYGRgYOBikGPQYWB0cfMJYeBgYGGAAJAMY05meiJQDMoDyrGAaQ4gZoOIAgCKIwNPAHicY2BkYWCcwMDKwMHUyXSGgYGhH0IzvmYwYuRgYGBiYGVmwAoC0lxTGByeTX02lbnhfwNDDHMDQwNQmBEkBwD0bQ0NeJxjYGBgZWBgYAZiHSBmYWBgDGFgZAABP6AoI1icmYELLM7CoARWwwISfzb1/38YCeSzgEkGRjaGUcADJmWgPHBYQTADIwCVUwu9AAABAAAAAAN/AloAEQAAJSInASY0NjIXCQE2MhYUBwEGAgAVEf63DyArEAEjASMQKyAP/rcRphABSRArIBD+3QEjECArEf64EHicY2BkYGAAYlmBxIXx/DZfGbhZGEDg+ozbtcg0CwNTFJDiYGAC8QAEkQjYeJxjYGRgYG7438AQw8IAAkCSkQEVMAEARwgCawQAAAAEAAAAAAAAAAAkAAB4nGNgZGBgYGIQYgDRIBYDAxcQMjD8B/MZAApZASwAAHicZY9NTsMwEIVf+gekEqqoYIfkBWIBKP0Rq25YVGr3XXTfpk6bKokjx63UA3AejsAJOALcgDvwSCebNpbH37x5Y08A3OAHHo7fLfeRPVwyO3INF7gXrlN/EG6QX4SbaONVuEX9TdjHM6bCbXRheYPXuGL2hHdhDx18CNdwjU/hOvUv4Qb5W7iJO/wKt9Dx6sI+5l5XuI1HL/bHVi+cXqnlQcWhySKTOb+CmV7vkoWt0uqca1vEJlODoF9JU51pW91T7NdD5yIVWZOqCas6SYzKrdnq0AUb5/JRrxeJHoQm5Vhj/rbGAo5xBYUlDowxQhhkiMro6DtVZvSvsUPCXntWPc3ndFsU1P9zhQEC9M9cU7qy0nk6T4E9XxtSdXQrbsuelDSRXs1JErJCXta2VELqATZlV44RelzRiT8oZ0j/AAlabsgAAAB4nGNgYoAALgbsgImRiZGZgT8rMzGvJL80sagov9zEwpiBAQBBcwXp') format('woff'),
+    url('iconfont.ttf?t=1534245501846') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url('iconfont.svg?t=1534245501846#iconfont') format('svg'); /* iOS 4.1- */
+}
+  
+.iconfont {
+    font-family:"iconfont" !important;
+    font-size:16px;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+  
+.icon-jiantouarrow483:before { content: "\e695"; }
+
+/* 切换每页条数的select框 */
+.pagination-select {
+    position: absolute!important;
+    width: 100px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(220, 222, 226);
+    border-radius: 5px;
+    position: absolute;
+    top: 35px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.2);
+    padding: 5px 0;
+    max-height: 200px;
+    overflow: auto;
+    /* transition: opacity 1s;
+    -webkit-transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    -ms-transition: opacity 1s; */
+}
+
+.pagination-hide {
+    display: none;
+}
+
+.pagination-animation-fadein {
+    animation: fadein 1s;
+}
+
+.pagination-animation-fadeout {
+    animation: fadeout 1s;
+}
+
+@keyframes fadein
+{
+    0% { opacity: 0; }
+    100% { opacity: 1;}
+}
+
+@keyframes fadeout
+{
+    0% { opacity: 1; }
+    100% { opacity: 0;}
+}
+
+/* .pagination-hide-opacity {
+    opacity: 0;
+}
+
+.pagination-show {
+    opacity: 1;
+} */
+
+/* 图标旋转 */
+.pagination-icon {
+    display: inline-block;
+    transition: transform 0.5s;
+    -webkit-transition: transform 0.5s;
+    -moz-transition: transform 0.5s;
+    -o-transition: transform 0.5s;
+    -ms-transition: transform 0.5s;
+}
+
+.pagination-icon-rotate {
+    transform: rotate(180deg);
+}
+
+/* 下拉选择框样式 */
+.pagination-select div {
+    color: rgb(80, 90, 110);
+}
+
+.pagination-select div:hover {
+    background-color: rgb(243, 243, 243);
+}
+
+.pagination-select-div-selected {
+    color: rgb(92, 173, 255)!important;
+}
+
+.pagination-li-disabled {
+    color: rgb(204, 204, 204)!important;
+}
+
+.pagination-li-disabled:hover {
+    cursor: not-allowed!important;
+    border-color: rgb(0,0,0,.2)!important;
+    box-shadow: 0 1px 6px rgba(0,0,0,.2)!important;
+}
