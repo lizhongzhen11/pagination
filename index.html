@@ -8,7 +8,7 @@
         .container {
             height: 100px;
             width: 800px;
-            /* border: 1px solid rosybrown; */
+            border: 1px solid rosybrown;
             margin: 0 auto;
         }
     </style>
@@ -18,7 +18,14 @@
     <script src="./pagination.js"></script>
     <script>
         var container = document.getElementById('container')
-        pagination.init(container, {count: 48})
+        pagination.init(container, {
+            count: 88,
+            callBack: function (currentPage, pageSize, pageTotal) {
+                console.log('currentPage: ' + currentPage)
+                console.log('pageSize: ' + pageSize)
+                console.log('pageTotal: ' + pageTotal)
+            }
+        })
     </script>
 </body>
 </html>

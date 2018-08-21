@@ -1,11 +1,15 @@
 /**
  * @author lizz
+ *         create at 2018-08-16
+ *         modify at 2018-08-21
+ *         PS：因为懒！
  * @description 采用 面向委托 设计模式来编写，思想学自《你不知道的javascript》
  *              样式主要借鉴于 iview
  *              代码借鉴于 苏宁前端组所用的分页插件，不过该插件是用jq写的，采用原型继承思想
- *              我参照着用js+面向委托思想来试着写
+ *              我参照着用 js + 面向委托思想 来试着写
  * 
  * @constant 注意：需要同时在页面上引入 pagination.css
+ *           兼容性 >= IE10 因为用到了 classList 属性
  * 
  * @description 用法：pagination.init(
  *                      container, // 需要插入分页的 父节点
@@ -72,11 +76,44 @@
                 this.options.pageTotal = Math.ceil(this.options.count / this.options.pageSize)
             }
             for (let i = 0; i < this.options.pageTotal; i++) {
+                // 默认显示第一页，第一页激活
                 if (this.options.currentPage === i + 1) {
                     everyPage += `<li class="pagination-ul-active">${i + 1}</li>`
                     continue
                 }
-                everyPage += `<li>${i + 1}</li>`
+                // 总页码较多时,多出来的页码用 ... 代替
+                // 当前页左边
+                if (this.options.currentPage > i + 1) {
+                    if (this.options.currentPage - 1 > 3) {
+                        if (this.options.currentPage - 1 === i + 1 || this.options.currentPage - 2 === i + 1) {
+                            everyPage += `<li>${i + 1}</li>`
+                        } else if (i + 1 === 2) {
+                            everyPage += `<li>...</li>`
+                        } else if (i + 1 === 1) {
+                            everyPage += `<li>1</li>`
+                        }
+                        continue
+                    }
+                    everyPage += `<li>${i + 1}</li>`
+                    continue
+                }
+                // 当前页右边
+                if (this.options.pageTotal - this.options.currentPage >= 2 && this.options.pageTotal !== i + 1) {
+                    if (this.options.currentPage !== 1 && i + 1 === 1) {
+                        everyPage += `<li>1</li>`
+                        continue
+                    }
+                    if (this.options.currentPage + 1 === i + 1 || this.options.currentPage + 2 === i + 1) {
+                        everyPage += `<li>${i + 1}</li>`
+                    } else if (this.options.currentPage + 3 === i + 1) {
+                        everyPage += `<li>...</li>`
+                    }
+                    continue
+                }
+                // 最后一页显示
+                if (this.options.pageTotal === i + 1) {
+                    everyPage += `<li>${i + 1}</li>`
+                }
             }
             for (let i = 0; i < this.options.pageSizeTypes.length; i++) {
                 // 比如当前 10页/每条，下拉框对应的 10 处于选中状态
@@ -173,6 +210,8 @@
                 let el = e.target.parentNode.children
                 me.disableButton(el)
                 me.changeActive(e.target)
+                me.render()
+                me.bindEvent()
             })
         },
         /**
@@ -180,6 +219,7 @@
          * @param {*} e 当前被点击的节点
          */
         changeActive: function (e) {
+            // console.log(e)
             e.classList.add('pagination-ul-active')
             // 被选中节点如果改变了，那么先前的被选中节点取消选中状态和样式
             let brothers =  sibling(e)
@@ -253,12 +293,23 @@
          * @param {*} el 上一页或下一页节点
          */
         changeCurrent: function (el) {
+            // console.log(el)
             el.innerHTML === '上一页' && this.options.currentPage !== 1 ? this.options.currentPage -= 1 : ''
             el.innerHTML === '下一页' && this.options.currentPage !== this.options.pageTotal ? this.options.currentPage += 1 : ''
             this.jump()
             this.disableButton(el.parentNode.children)
             // 因为el是上一页/下一页节点，但是changeActive(e)需要的是当前被点击的节点
-            this.changeActive(el.parentNode.children[this.options.currentPage + 1])
+            // 由于将多余页码用 ... 代替，所以不能直接通过this.changeActive(el.parentNode.children[this.options.currentPage + 1])
+            // 来控制页码激活
+            // 思来想去，加了个for循环遍历
+            for (let i = 0; i < el.parentNode.children.length; i++) {
+                if (el.parentNode.children[i].innerHTML === this.options.currentPage.toString()) {
+                    this.changeActive(el.parentNode.children[i])
+                    break
+                }
+            }
+            this.render()
+            this.bindEvent()
         },
     }
     /**
